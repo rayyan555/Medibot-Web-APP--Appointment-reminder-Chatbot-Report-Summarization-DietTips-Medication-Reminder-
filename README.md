@@ -1,0 +1,2 @@
+# Medibot-Web-APP--Appointment-reminder-Chatbot-Report-Summarization-DietTips-Medication-Reminder-
+Medibot is a secure, AI-powered healthcare web app with a medical chatbot, report summarization, appointment &amp; medication reminders, and diet tips. Built using Flask, LangChain, Groq LLM, and Hugging Face, it offers accurate answers, patient-friendly summaries, and personalized health management while ensuring privacy
