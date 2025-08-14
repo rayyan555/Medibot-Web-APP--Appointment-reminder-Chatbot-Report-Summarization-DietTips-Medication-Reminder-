@@ -1,0 +1,245 @@
+body, html {
+    height: 100%;
+    margin: 0;
+    background: linear-gradient(to right, #263d4d, #323741, #21214e);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.chat {
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.card {
+    height: 500px;
+    border-radius: 15px !important;
+    background-color: rgba(0, 0, 0, 0.4) !important;
+    backdrop-filter: blur(4px);
+    overflow: hidden;
+}
+
+.card-header {
+    border-radius: 15px 15px 0 0 !important;
+    border-bottom: 0 !important;
+}
+
+.card-body {
+    padding: 1rem;
+}
+
+.card-footer {
+    border-radius: 0 0 15px 15px !important;
+    border-top: 0 !important;
+    background-color: transparent;
+}
+
+.container {
+    align-content: center;
+}
+
+.type_msg {
+    background-color: rgba(255, 255, 255, 0.05) !important;
+    border: none !important;
+    color: white !important;
+    height: 60px !important;
+    border-radius: 0.375rem;
+    padding: 10px 15px;
+}
+
+.type_msg:focus {
+    box-shadow: none !important;
+    outline: none !important;
+}
+
+.input-group {
+    gap: 0.5rem;
+}
+
+.send_btn {
+    border-radius: 0.375rem !important;
+    background-color: rgba(255, 255, 255, 0.08) !important;
+    border: none !important;
+    color: white !important;
+    padding: 0 20px;
+    transition: background 0.3s ease;
+}
+
+.send_btn:hover {
+    background-color: rgba(255, 255, 255, 0.2) !important;
+}
+
+.msg_card_body {
+    overflow-y: auto;
+    padding: 1rem;
+}
+
+.user_img {
+    height: 70px;
+    width: 70px;
+    border: 2px solid #f5f6fa;
+}
+
+.user_img_msg {
+    height: 40px;
+    width: 40px;
+    border: 2px solid #f5f6fa;
+}
+
+.img_cont {
+    position: relative;
+    height: 70px;
+    width: 70px;
+}
+
+.img_cont_msg {
+    height: 40px;
+    width: 40px;
+}
+
+.online_icon {
+    position: absolute;
+    height: 15px;
+    width: 15px;
+    background-color: #4cd137;
+    border-radius: 50%;
+    bottom: 0.2em;
+    right: 0.4em;
+    border: 2px solid white;
+}
+
+.user_info {
+    margin: auto 0 auto 15px;
+}
+
+.user_info span {
+    font-size: 20px;
+    color: white;
+    font-weight: 600;
+}
+
+.user_info p {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.6);
+    margin-bottom: 0;
+}
+
+.msg_cotainer {
+    margin-left: 10px;
+    border-radius: 20px;
+    background-color: #2196f3;
+    color: white;
+    padding: 10px 15px;
+    position: relative;
+    max-width: 70%;
+    word-wrap: break-word;
+}
+
+.msg_cotainer_send {
+    margin-right: 10px;
+    border-radius: 20px;
+    background-color: #58cc71;
+    color: white;
+    padding: 10px 15px;
+    position: relative;
+    max-width: 70%;
+    word-wrap: break-word;
+}
+
+.msg_time, .msg_time_send {
+    font-size: 10px;
+    position: absolute;
+    bottom: -18px;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.msg_time {
+    left: 0;
+}
+
+.msg_time_send {
+    right: 0;
+}
+
+@media (max-width: 576px) {
+    .card {
+        height: 100vh;
+        border-radius: 0 !important;
+    }
+
+    .user_img {
+        height: 50px;
+        width: 50px;
+    }
+
+    .user_info span {
+        font-size: 16px;
+    }
+
+    .user_info p {
+        font-size: 10px;
+    }
+
+    .type_msg {
+        height: 50px !important;
+    }
+
+    .send_btn {
+        padding: 0 15px;
+    }
+}
+/* === Dashboard Medical UI === */
+
+.med-card {
+    border-radius: 15px;
+    background-color: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(6px);
+    padding: 20px;
+    margin-bottom: 30px;
+    color: #fff;
+    transition: transform 0.2s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.med-card:hover {
+    transform: scale(1.02);
+}
+
+.med-card h4 {
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.med-card p {
+    font-size: 15px;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.med-card .btn {
+    margin-top: 10px;
+    border-radius: 8px;
+    font-weight: 500;
+}
+
+.dashboard-title {
+    color: #00ffe0;
+    text-align: center;
+    font-weight: 700;
+    margin-bottom: 40px;
+    text-shadow: 1px 1px 8px rgba(0,255,255,0.3);
+}
+
+.bg-blur-info {
+    background-color: rgba(0, 123, 255, 0.15);
+}
+
+.bg-blur-warning {
+    background-color: rgba(255, 193, 7, 0.15);
+}
+
+.bg-blur-success {
+    background-color: rgba(40, 167, 69, 0.15);
+}
+
+.bg-blur-dark {
+    background-color: rgba(52, 58, 64, 0.25);
+}
