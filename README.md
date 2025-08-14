@@ -51,5 +51,3 @@ It combines **appointment & medication reminders**, a **medical chatbot**, **rep
 This project is licensed under the Apache 2.0 License.
 
 ---
-
-If you want, I can also prepare a **GitHub README.md** file with screenshots, installation steps, and usage instructions so it looks very professional.
