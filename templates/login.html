@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MediBot Login</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: url('{{ url_for("static", filename="img/dashbg.jpg") }}') no-repeat center center fixed;
+      background-size: cover;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .login-container {
+      background: rgba(255, 255, 255, 0.92);
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      width: 400px;
+      padding: 40px 30px;
+      text-align: center;
+    }
+
+    .login-container img {
+      width: 80px;
+      margin-bottom: 15px;
+    }
+
+    .login-container h2 {
+      font-size: 22px;
+      font-weight: 600;
+      color: #007bff;
+      margin-bottom: 30px;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 20px;
+    }
+
+    .input-wrapper {
+      position: relative;
+    }
+
+    .input-wrapper input {
+      width: 100%;
+      padding: 12px 12px 12px 42px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      background-color: #eef4ff;
+      font-size: 14px;
+      outline: none;
+    }
+
+    .input-wrapper i {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      color: #888;
+    }
+
+    .btn-login {
+      padding: 12px;
+      background-color: #007bff;
+      border: none;
+      border-radius: 8px;
+      color: white;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .btn-login:hover {
+      background-color: #0056b3;
+    }
+
+    .register-text {
+      margin-top: 18px;
+      font-size: 14px;
+    }
+
+    .register-text a {
+      color: #007bff;
+      text-decoration: none;
+    }
+
+    .register-text a:hover {
+      text-decoration: underline;
+    }
+
+    .quote {
+      font-style: italic;
+      font-size: 13px;
+      color: #666;
+      margin-top: 20px;
+    }
+
+    #flash-message {
+      margin-bottom: 20px;
+    }
+
+    .flash {
+      background-color: #e1f3ff;
+      color: #007bff;
+      padding: 10px 15px;
+      border-radius: 8px;
+      font-size: 14px;
+      text-align: center;
+      box-shadow: 0 4px 8px rgba(0, 123, 255, 0.1);
+    }
+
+    @media (max-width: 460px) {
+      .login-container {
+        width: 90%;
+        padding: 30px 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="login-container">
+    <img src="https://cdn-icons-png.flaticon.com/512/3774/3774299.png" alt="Doctor Icon" />
+    <h2><i class="fas fa-user-md"></i> Login to MediBot</h2>
+
+    <!-- ✅ Flash Message Block -->
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <div id="flash-message">
+          {% for message in messages %}
+            <div class="flash">{{ message }}</div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+
+    <!-- ✅ Login Form -->
+    <form action="/login" method="POST">
+      <div class="input-wrapper">
+        <i class="fas fa-envelope"></i>
+        <input type="email" name="email" placeholder="Email Address" required />
+      </div>
+      <div class="input-wrapper">
+        <i class="fas fa-lock"></i>
+        <input type="password" name="password" placeholder="Password" required />
+      </div>
+      <button type="submit" class="btn-login">Login</button>
+    </form>
+
+    <div class="register-text">
+      <p>Don't have an account? <a href="/register">Register</a></p>
+    </div>
+    <div class="quote">“Your health is your wealth.”</div>
+  </div>
+
+  <!-- ✅ Flash Message Auto Hide -->
+  <script>
+    setTimeout(() => {
+      const flash = document.getElementById('flash-message');
+      if (flash) flash.style.display = 'none';
+    }, 2000);
+  </script>
+
+</body>
+</html>

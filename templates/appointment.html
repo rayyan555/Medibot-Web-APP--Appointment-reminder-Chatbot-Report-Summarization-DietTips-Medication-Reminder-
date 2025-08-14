@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Appointment Management</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;700;900&display=swap" rel="stylesheet" />
+  <style>
+    /* Reset and base */
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: url('{{ url_for("static", filename="img/dashbg.jpg") }}') no-repeat center center fixed;
+      background-size: cover;
+      color: #224a7b;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 40px 20px;
+    }
+
+    .section {
+      background: rgba(255, 255, 255, 0.92);
+      max-width: 480px;
+      width: 100%;
+      padding: 30px 35px;
+      border-radius: 24px;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.1);
+      text-align: center;
+      user-select: none;
+      position: relative;
+    }
+
+    h2 {
+      font-weight: 900;
+      font-size: 28px;
+      margin-bottom: 18px;
+      color: #0059cc;
+    }
+
+    p {
+      font-size: 1rem;
+      margin-bottom: 18px;
+      font-weight: 600;
+      color: #224a7b;
+      text-shadow: 0 1px 1px rgba(255, 255, 255, 0.85);
+    }
+
+    p.italic {
+      font-style: italic;
+      font-weight: 500;
+      color: #3a6aa8;
+      font-size: 0.95rem;
+      margin-bottom: 28px;
+    }
+
+    /* Form styling */
+    form {
+      text-align: left;
+      margin-bottom: 36px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: 600;
+      color: #003f7f;
+      font-size: 0.95rem;
+    }
+
+    input[type="text"], input[type="date"], input[type="time"] {
+      width: 100%;
+      padding: 8px 10px;
+      margin-bottom: 18px;
+      border-radius: 8px;
+      border: 1.5px solid #0077b6;
+      font-size: 0.95rem;
+      outline: none;
+      transition: border-color 0.3s ease;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    input[type="text"]:focus, input[type="date"]:focus, input[type="time"]:focus {
+      border-color: #023e8a;
+    }
+
+    /* Button styling without glow or shadow */
+    button.btn {
+      display: inline-block;
+      background: linear-gradient(135deg, #0077b6, #023e8a);
+      color: white;
+      padding: 12px 28px;
+      border-radius: 30px;
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      border: none;
+      user-select: none;
+      transition: background-color 0.3s ease;
+      box-shadow: none;
+    }
+
+    button.btn:hover,
+    button.btn:focus {
+      background-color: #005f8a;
+      box-shadow: none;
+      outline: none;
+    }
+
+    /* Table styling */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    th, td {
+      padding: 12px 14px;
+      border-bottom: 1px solid #c0d3f7;
+      color: #224a7b;
+      text-align: left;
+      font-size: 0.95rem;
+    }
+
+    th {
+      background: #d9ecff;
+      font-weight: 700;
+      font-size: 1rem;
+    }
+
+    /* Delete button styling */
+    .delete-btn {
+      background: #d90429;
+      border: none;
+      padding: 6px 14px;
+      border-radius: 30px;
+      color: white;
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      box-shadow: none;
+    }
+
+    .delete-btn:hover {
+      background: #b00322;
+      box-shadow: none;
+    }
+
+    /* Flash messages */
+    .flash-message {
+      max-width: 480px;
+      margin: 10px auto 30px auto;
+      padding: 12px 20px;
+      border-radius: 14px;
+      font-weight: 600;
+      text-align: center;
+      font-size: 0.95rem;
+    }
+
+    .flash-message.success {
+      background-color: #c7f0d6;
+      color: #0a7020;
+      border: 1.5px solid #0a7020;
+    }
+
+    .flash-message.error, .flash-message.danger {
+      background-color: #f7c7c7;
+      color: #a70000;
+      border: 1.5px solid #a70000;
+    }
+
+    /* Floating circles - subtle and blurred */
+    .floating-circle {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(30px);
+      opacity: 0.1;
+      z-index: 0;
+      animation: floatUpDown 6s ease-in-out infinite alternate;
+    }
+    .floating-circle.blue {
+      width: 120px;
+      height: 120px;
+      background: #0077b6;
+      top: -40px;
+      right: -40px;
+    }
+    .floating-circle.lightblue {
+      width: 140px;
+      height: 140px;
+      background: #74a9d8;
+      bottom: -50px;
+      left: -50px;
+      animation-duration: 8s;
+    }
+
+    @keyframes floatUpDown {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-15px); }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="section" role="main" aria-label="Appointment Management Section">
+
+    <h2>⏰ Appointment Reminders</h2>
+
+    <p>
+      Keep track of your important medical appointments effortlessly. Schedule your visits, get timely alerts, and never miss a check-up or consultation again.
+    </p>
+
+    <p class="italic">
+      Your appointment schedule, always just a click away within your dashboard
+    </p>
+
+    <!-- Flash messages -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="flash-message {{category}}">
+            {{ message }}
+          </div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    <!-- Add appointment form -->
+    <form method="POST" action="{{ url_for('appointments') }}">
+      <label for="doctor_name">Doctor's Name</label>
+      <input type="text" name="doctor_name" id="doctor_name" placeholder="Enter Doctor's name" required />
+
+      <label for="date">Date</label>
+      <input type="date" name="date" id="date" required />
+
+      <label for="time">Time</label>
+      <input type="time" name="time" id="time" required />
+
+      <button type="submit" class="btn">➕ Add Appointment</button>
+    </form>
+
+    <!-- Appointment list -->
+    {% if appointments %}
+      <table>
+        <thead>
+          <tr>
+            <th>Doctor</th>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for appointment in appointments %}
+          <tr>
+            <td>{{ appointment.doctor_name }}</td>
+            <td>{{ appointment.date.strftime('%Y-%m-%d') }}</td>
+            <td>{{ appointment.time.strftime('%H:%M') }}</td>
+            <td>
+              <form method="POST" action="{{ url_for('delete_appointment', id=appointment.id) }}" onsubmit="return confirm('Delete this appointment?');">
+                <button type="submit" class="delete-btn" aria-label="Delete appointment with {{ appointment.doctor_name }}">Delete</button>
+              </form>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    {% else %}
+      <p>No appointments scheduled yet.</p>
+    {% endif %}
+
+    <!-- Decorative floating circles -->
+    <div class="floating-circle blue" aria-hidden="true"></div>
+    <div class="floating-circle lightblue" aria-hidden="true"></div>
+
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,138 @@
+{% extends 'base.html' %}
+{% block title %}Medical Reminders | MediBot{% endblock %}
+
+{% block content %}
+<style>
+    .reminder-container {
+        background: #ffffff;
+        padding: 40px;
+        border-radius: 16px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+        margin-top: 40px;
+    }
+
+    .reminder-container h2,
+    .reminder-container h4 {
+        color: #0077b6;
+        font-weight: 700;
+    }
+
+    .form-label {
+        font-weight: 600;
+        color: #333;
+    }
+
+    .form-control {
+        border-radius: 8px;
+    }
+
+    .btn-primary {
+        padding: 10px 20px;
+        border-radius: 8px;
+        font-weight: 600;
+        box-shadow: 0 4px 10px rgba(0, 123, 255, 0.2);
+    }
+
+    .reminder-card {
+        background: #f1f9ff;
+        border: 1px solid #cce5ff;
+        padding: 15px 20px;
+        border-radius: 12px;
+        margin-bottom: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+        transition: transform 0.2s ease;
+    }
+
+    .reminder-card:hover {
+        transform: scale(1.01);
+    }
+
+    .reminder-title {
+        font-weight: 600;
+        color: #023e8a;
+        font-size: 1.1rem;
+    }
+
+    .reminder-time {
+        color: #555;
+        font-size: 0.95rem;
+    }
+
+    .no-reminder {
+        color: #888;
+        font-style: italic;
+    }
+
+    @media (max-width: 768px) {
+        .reminder-container {
+            padding: 20px;
+        }
+    }
+</style>
+
+<div class="container reminder-container">
+    <h2 class="mb-4">⏰ Set a Medical Reminder</h2>
+
+    <form method="POST" action="{{ url_for('add_reminder') }}" class="mb-5">
+    <div class="row">
+        <div class="col-md-4 mb-3">
+            <label for="title" class="form-label">Reminder Title</label>
+            <input type="text" name="title" class="form-control" placeholder="e.g., Take BP Medicine" required>
+        </div>
+        <div class="col-md-4 mb-3">
+            <label for="date" class="form-label">Date</label>
+            <input type="date" name="date" class="form-control" required>
+        </div>
+        <div class="col-md-4 mb-3">
+            <label for="time" class="form-label">Time</label>
+            <input type="time" name="time" class="form-control" required>
+        </div>
+        <div class="col-md-12 mb-3">
+    <label for="description" class="form-label">Description</label>
+    <textarea name="description" class="form-control" placeholder="Details about this reminder..." rows="2"></textarea>
+</div>
+
+    </div>
+    <button type="submit" class="btn btn-primary"><i class="fas fa-plus-circle"></i> Set Reminder</button>
+</form>
+
+    <h4 class="mb-3">📋 Your Reminders</h4>
+
+    {% if reminders %}
+        {% for reminder in reminders %}
+            <div class="reminder-card">
+                <div>
+                    <div class="reminder-title">{{ reminder.title }}</div>
+                    <div class="reminder-time">{{ reminder.datetime.strftime('%d %b %Y at %I:%M %p') }}</div>
+                </div>
+                <i class="fas fa-bell text-primary fs-4"></i>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p class="no-reminder">You haven’t added any reminders yet.</p>
+    {% endif %}
+</div>
+{% for reminder in reminders %}
+    <div class="reminder-card">
+        <div>
+            <div class="reminder-title">{{ reminder.title }}</div>
+            <div class="reminder-time">{{ reminder.date.strftime('%d %b %Y') }} at {{ reminder.time.strftime('%I:%M %p') }}</div>
+        </div>
+
+        <div class="d-flex align-items-center gap-2">
+            <i class="fas fa-bell text-primary fs-4"></i>
+
+            <!-- Delete button -->
+            <form method="POST" action="{{ url_for('delete_reminder', id=reminder.id) }}" style="margin: 0;">
+                <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Delete this reminder?');">
+                    🗑 Delete
+                </button>
+            </form>
+        </div>
+    </div>
+{% endfor %}
+
+{% endblock %}

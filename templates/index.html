@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% block title %}Welcome | MediBot{% endblock %}
+
+{% block content %}
+<style>
+    .hero-section {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        padding: 100px 20px;
+        background: linear-gradient(to right, #dff6fd, #f1fafe);
+        border-radius: 16px;
+        box-shadow: 0 12px 25px rgba(0, 0, 0, 0.05);
+        margin-top: 40px;
+    }
+
+    .hero-section h1 {
+        font-size: 3rem;
+        font-weight: 700;
+        color: #0077b6;
+        margin-bottom: 20px;
+    }
+
+    .hero-section p {
+        font-size: 1.2rem;
+        color: #444;
+        margin-bottom: 30px;
+        max-width: 700px;
+    }
+
+    .hero-buttons .btn {
+        padding: 12px 30px;
+        font-size: 1rem;
+        font-weight: 600;
+        margin: 10px;
+        border-radius: 8px;
+    }
+
+    .hero-image {
+        margin-top: 50px;
+    }
+
+    .hero-image img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 12px;
+    }
+
+    @media (max-width: 768px) {
+        .hero-section h1 {
+            font-size: 2rem;
+        }
+
+        .hero-section p {
+            font-size: 1rem;
+        }
+    }
+</style>
+
+<div class="container">
+    <div class="hero-section">
+        <h1>👨‍⚕️ Welcome to <span style="color:#023e8a;">MediBot</span></h1>
+        <p>Your AI-powered medical assistant that helps you chat, monitor your health, receive diet tips, and manage medication — all in one platform.</p>
+        <div class="hero-buttons">
+            <a href="/login" class="btn btn-primary"><i class="fas fa-sign-in-alt"></i> Login</a>
+            <a href="/register" class="btn btn-outline-primary"><i class="fas fa-user-plus"></i> Register</a>
+        </div>
+        <div class="hero-image">
+            <img src="{{ url_for('static', filename='img/dashbg.jpg') }}" alt="Medical Background">
+        </div>
+    </div>
+</div>
+{% endblock %}
